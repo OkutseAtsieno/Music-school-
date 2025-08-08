@@ -1,0 +1,26 @@
+{% load static %}
+
+<style>
+  .success-banner {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full screen height */
+    background: url("{% static 'pic 6.jpeg' %}") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 1px 1px 5px black;
+    text-align: center;
+  }
+</style>
+
+<div class="success-banner">
+  <h2>You’ve hit the right note!</h2>
+  <p>Thank you for enrolling — your musical journey starts now!</p>
+</div>
+
+
+

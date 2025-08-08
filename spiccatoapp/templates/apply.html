@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block title %}Apply Now - Spiccato Tunes{% endblock %}
+
+{% block content %}
+<style>
+    
+
+    .enroll-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        background-color: #f9f9f9;
+    }
+
+    .form-control {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    label {
+        font-weight: 500;
+    }
+
+    .apply-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+</style>
+
+<!-- ✅ Apply Now Button at Top -->
+<div class="apply-button">
+    <a href="#enroll-form" class="btn btn-success btn-lg">Apply Now</a>
+</div>
+
+<!-- 🎵 Enrollment Form -->
+<div class="enroll-container" id="enroll-form">
+    <h2 class="text-center mb-4">Music School Enrollment Form</h2>
+    <form method="POST" action="{% url 'enroll' %}">
+        {% csrf_token %}
+
+        <!-- Full Name -->
+        <div class="form-group mt-2">
+            <label for="full_name">Full Name</label>
+            <input type="text" class="form-control" name="full_name" id="full_name" required>
+        </div>
+
+        <!-- Age -->
+        <div class="form-group mt-2">
+            <label for="age">Age</label>
+            <input type="number" class="form-control" name="age" id="age" min="2" required>
+        </div>
+
+        <!-- Guardian's Phone Number -->
+        <div class="form-group mt-2" id="guardian-phone-group" style="display: none;">
+            <label for="guardian_phone">Guardian's Phone Number</label>
+            <input type="text" class="form-control" name="guardian_phone" id="guardian_phone">
+        </div>
+
+        <!-- Email -->
+        <div class="form-group mt-2">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" name="email" id="email" required>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group mt-2">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" name="phone" id="phone" required>
+        </div>
+
+        <!-- Instrument -->
+        <div class="form-group mt-2">
+            <label for="instrument">Instrument</label>
+            <select class="form-control" name="instrument" id="instrument" required onchange="toggleGuitarOptions()">
+                <option value="">-- Select Instrument --</option>
+                <option value="Piano">Piano</option>
+                <option value="Violin">Violin</option>
+                <option value="Cello">Cello</option>
+                <option value="ABRSM">ABRSM</option>
+                <option value="Saxophone">Saxophone</option>
+                <option value="Trumpet">Trumpet</option>
+                <option value="Music Production">Music Production</option>
+                <option value="Sound Engineering">Sound Engineering</option>
+                <option value="Flute">Flute</option>
+                <option value="Recorder">Recorder</option>
+                <option value="Drums">Drums</option>
+                <option value="Guitar">Guitar</option>
+                <option value="Voice">Voice</option>
+            </select>
+        </div>
+
+        <!-- Guitar Type -->
+        <div class="form-group mt-2" id="guitar-options" style="display: none;">
+            <label for="guitar_type">Guitar Type</label>
+            <select class="form-control" name="guitar_type" id="guitar_type">
+                <option value="">-- Select Guitar Type --</option>
+                <option value="Acoustic">Acoustic</option>
+                <option value="Lead/Solo">Lead/Solo</option>
+                <option value="Bass">Bass</option>
+            </select>
+        </div>
+
+        <!-- Schedule -->
+        <div class="form-group mt-2">
+            <label for="schedule">Preferred Schedule</label>
+            <select class="form-control" name="schedule" id="schedule" required>
+                <option value="">-- Select Schedule --</option>
+                <option value="Weekdays (Morning)">Weekdays (Morning)</option>
+                <option value="Weekdays (Afternoon)">Weekdays (Afternoon)</option>
+                <option value="Weekdays (Evening)">Weekdays (Evening)</option>
+                <option value="Weekends">Weekends</option>
+                <option value="Flexible">Flexible</option>
+            </select>
+        </div>
+
+        <!-- Mode of Study -->
+        <div class="form-group mt-2">
+            <label for="mode">Mode of Study</label>
+            <select class="form-control" name="mode" id="mode" required>
+                <option value="">-- Select Mode --</option>
+                <option value="Online">Online</option>
+                <option value="Blended">Blended</option>
+                <option value="Physical - Campus Based">Physical - Campus Based</option>
+                <option value="Physical - Home Based">Physical - Home Based</option>
+            </select>
+        </div>
+        <br>
+
+        <p>Any Inquiry <br>
+            Call or WhatsApp 
+            <a href="tel:+254729828945">0729828945</a><br>
+            or 
+            <a href="tel:+254719283798">0719283798</a><br>
+            Or email 
+            <a href="mailto:musunguduncan9@gmail.com">musunguduncan9@gmail.com</a>
+          </p>
+          
+       
+       
+
+        <!-- Consent Agreement -->
+<div class="form-group form-check mt-3">
+    <input type="checkbox" class="form-check-input" id="consent" name="consent" required>
+    <label class="form-check-label" for="consent">
+        I agree to the terms and allow Spiccato Tunes to contact me regarding my enrollment.
+    </label>
+</div>
+
+        
+
+        <!-- Submit -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Submit Enrollment</button>
+        </div>
+    </form>
+</div>
+
+
+<!-- ✅ Scripts -->
+<script>
+    function toggleGuitarOptions() {
+        const instrument = document.getElementById("instrument").value;
+        const guitarOptions = document.getElementById("guitar-options");
+        guitarOptions.style.display = instrument === "Guitar" ? "block" : "none";
+    }
+
+    function checkAgeForGuardianField() {
+        const age = parseInt(document.getElementById("age").value);
+        const guardianField = document.getElementById("guardian-phone-group");
+
+        if (!isNaN(age) && age < 18) {
+            guardianField.style.display = "block";
+            document.getElementById("guardian_phone").setAttribute("required", "required");
+        } else {
+            guardianField.style.display = "none";
+            document.getElementById("guardian_phone").removeAttribute("required");
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("age").addEventListener("input", checkAgeForGuardianField);
+    });
+</script>
+{% endblock %}
