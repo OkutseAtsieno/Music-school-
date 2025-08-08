@@ -130,3 +130,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'musunguduncan9@gmail.com'
 EMAIL_HOST_PASSWORD ='hruemsdfqsfzwvsk' 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
