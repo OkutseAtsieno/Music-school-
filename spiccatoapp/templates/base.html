@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     html {
       scroll-behavior: smooth;
@@ -21,7 +24,8 @@
       padding-top: 70px;
       margin: 0;
       background-color: #DAA520;
-      font-family: 'Playfair', serif;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
     }
 
     .navbar {
@@ -36,6 +40,23 @@
     .navbar.scrolled {
       background-color: #DAA520 !important;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .school-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #1035AC;
+      letter-spacing: 1.5px;
+    }
+
+    .nav-link {
+      color: #1035AC !important;
+      font-weight: 600;
+    }
+
+    .dropdown-menu .dropdown-item {
+      font-weight: 500;
     }
 
     .carousel-item img {
@@ -55,28 +76,13 @@
 
     .carousel-caption h5 {
       font-size: 3rem;
-      font-weight: bold;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
     }
 
     .carousel-caption p {
-      font-size: 1.5rem;
-    }
-
-    .school-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #1035AC;
-      letter-spacing: 1.5px;
-    }
-
-    .nav-link {
-      color: #1035AC !important;
-      font-weight: bold;
-    }
-
-    .dropdown-menu .dropdown-item {
-      font-weight: bold;
+      font-size: 1.2rem;
+      font-weight: 300;
     }
   </style>
 </head>
@@ -86,7 +92,6 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand school-brand d-flex align-items-center gap-2" href="{% url 'home' %}">
-       
         Spiccato Tunes Music School
         <img src="https://img.icons8.com/ios-filled/24/000000/violin.png" alt="Violin Icon" style="vertical-align: middle;" />
       </a>
@@ -100,11 +105,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'home' %}">Home</a>
           </li>
-
           <li class="nav-item">
             <a class="nav-link" href="{% url 'courses' %}">Courses</a>
           </li>
-
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
               Join Us
@@ -112,7 +115,6 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{% url 'apply' %}">Apply Now</a></li>
               <li><a class="dropdown-item" href="{% url 'Gallery' %}">Student Gallery</a></li>
-              
             </ul>
           </li>
         </ul>
@@ -143,13 +145,13 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{% static 'pic 3.jpeg' %}" class="d-block w-100" alt="Classes">
+        <img src="{% static 'pic 3.jpeg' %}" class="d-block w-100" alt="Personalized Classes">
         <div class="carousel-caption d-none d-md-block">
           <h5>Classes tailored just for you</h5>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{% static 'pic 6.jpeg' %}" class="d-block w-100" alt="Classes">
+        <img src="{% static 'pic 6.jpeg' %}" class="d-block w-100" alt="Music Quote">
         <div class="carousel-caption d-none d-md-block">
           <h5>Music gives a soul to the universe, wings to the mind, flight to the imagination and life to everything</h5>
           <p>– Plato</p>

@@ -1,81 +1,129 @@
 
 {% load static %}
 
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Spiccato Tunes Gallery</title>
 
-  <!-- ✅ Bootstrap 5 CSS CDN -->
+  <!-- ✅ Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- ✅ Google Font - Playfair Display for captions -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .carousel-inner {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .carousel-item {
+      position: relative;
+    }
+
     .carousel-item img {
-      height: 100vh;               /* Full screen height */
-      object-fit: cover;           /* Crop to fit */
-      width: 100%;
-      object-position: center;
+      height: 90vh; 
+      object-fit: cover;
+      object-position: center center;
+      transform: scale(1.05);
+      transition: transform 5s ease;
+    }
+
+    .carousel-item.active img {
+      transform: scale(1);
+    }
+
+    /* Gradient overlay */
+    .carousel-item::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+      z-index: 1;
+    }
+
+    /* Caption styling */
+    .carousel-caption {
+      z-index: 2;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .carousel-caption h5 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .carousel-caption p {
+      font-size: 1.2rem;
+      font-weight: 400;
     }
   </style>
 </head>
 <body>
 
   <!-- ✅ Carousel -->
-  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="{% static 'sp.jpg' %}" class="d-block w-100" alt="Slide 1">
+  <div class="container py-4">
+    <div id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{% static 'sp.jpg' %}" class="d-block w-100" alt="Slide 1">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'sp1.jpg' %}" class="d-block w-100" alt="Slide 2">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'sp2.jpg' %}" class="d-block w-100" alt="Slide 3">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'sp3.jpg' %}" class="d-block w-100" alt="Slide 4">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'sp4.jpg' %}" class="d-block w-100" alt="Slide 5">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'sp5.jpg' %}" class="d-block w-100" alt="Slide 6">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'sp6.jpg' %}" class="d-block w-100" alt="Slide 7">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'sp7.jpg' %}" class="d-block w-100" alt="Slide 8">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'sp8.jpg' %}" class="d-block w-100" alt="Slide 9">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'sp10.jpg' %}" class="d-block w-100" alt="Slide 10">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'p9.jpg' %}" class="d-block w-100" alt="Slide 11">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'p11.jpg' %}" class="d-block w-100" alt="Slide 12">
+        </div>
       </div>
-      <div class="carousel-item">
-        <img src="{% static 'sp1.jpg' %}" class="d-block w-100" alt="Slide 2">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'sp2.jpg' %}" class="d-block w-100" alt="Slide 3">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'sp3.jpg' %}" class="d-block w-100" alt="Slide 4">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'sp4.jpg' %}" class="d-block w-100" alt="Slide 5">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'sp5.jpg' %}" class="d-block w-100" alt="Slide 6">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'sp6.jpg' %}" class="d-block w-100" alt="Slide 7">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'sp7.jpg' %}" class="d-block w-100" alt="Slide 7">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'sp8.jpg' %}" class="d-block w-100" alt="Slide 7">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'sp10.jpg' %}" class="d-block w-100" alt="Slide 7">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'p9.jpg' %}" class="d-block w-100" alt="Slide 7">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'p11.jpg' %}" class="d-block w-100" alt="Slide 7">
-      </div>
-    </div>
 
-    <!-- Controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
   </div>
 
-  <!-- ✅ Bootstrap 5 JS Bundle CDN (must be before </body>) -->
+  <!-- ✅ Bootstrap 5 JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
