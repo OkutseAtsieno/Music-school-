@@ -1,0 +1,34 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    container_name: spiccato-backend
+    command: gunicorn spiccato.wsgi:application --bind 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: spiccato.settings
+      DEBUG: "True"
+      ALLOWED_HOSTS: "localhost,127.0.0.1,backend,frontend"
+      SECRET_KEY: "django-insecure-s@udnl*(h9s7-ustal4#$r&!-8t0g-f2wu_v-@z2nac3uv_n!0"
+    volumes:
+      - .:/app
+    networks:
+      - spiccato-net
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+    container_name: spiccato-frontend
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - spiccato-net
+
+networks:
+  spiccato-net:
+    driver: bridge
