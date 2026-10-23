@@ -1,16 +1,29 @@
-__pycache__/
-*.py[cod]
-*.sqlite3
-.env
 .git/
 .gitignore
 .DS_Store
+__pycache__/
+*.py[cod]
+*.log
+
+# DB and media live on volumes, not inside the image
+db.sqlite3
+db.sqlite3-journal
+staticfiles/
+media/
+
+# Secrets
+.env
+*.env
+!.env.example
+
+# Dev tooling
 venv/
 .venv/
-node_modules/
-.pytest_cache/
-.mypy_cache/
-.coverage
-.idea/
 .vscode/
-*.log
+.idea/
+*.md
+
+# Old build artifacts that are being retired
+backend.Dockerfile
+frontend.Dockerfile
+nginx/

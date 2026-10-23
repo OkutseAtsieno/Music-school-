@@ -1,34 +1,26 @@
 services:
-  backend:
-    build:
-      context: .
-      dockerfile: backend.Dockerfile
-    container_name: spiccato-backend
-    command: gunicorn spiccato.wsgi:application --bind 0.0.0.0:8000
-    ports:
-      - "8000:8000"
-    environment:
-      DJANGO_SETTINGS_MODULE: spiccato.settings
-      DEBUG: "True"
-      ALLOWED_HOSTS: "localhost,127.0.0.1,backend,frontend"
-      SECRET_KEY: "django-insecure-s@udnl*(h9s7-ustal4#$r&!-8t0g-f2wu_v-@z2nac3uv_n!0"
+  music-school:
+    build: .
+    image: music-school:latest
+    container_name: music-school
+    restart: unless-stopped
+    env_file:
+      - .env
     volumes:
-      - .:/app
+      - music-school-db:/app/dbstore
+      - music-school-media:/app/media
+    environment:
+      - DJANGO_DB_PATH=/app/dbstore/db.sqlite3
+    expose:
+      - "8000"
     networks:
-      - spiccato-net
+      - web
 
-  frontend:
-    build:
-      context: .
-      dockerfile: frontend.Dockerfile
-    container_name: spiccato-frontend
-    depends_on:
-      - backend
-    ports:
-      - "80:80"
-    networks:
-      - spiccato-net
+volumes:
+  music-school-db:
+  music-school-media:
 
 networks:
-  spiccato-net:
-    driver: bridge
+  web:
+    external: true
+    name: web
