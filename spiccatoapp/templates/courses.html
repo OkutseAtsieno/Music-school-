@@ -1,179 +1,206 @@
-
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Courses | Spiccato Tunes{% endblock %}
 
 {% block content %}
-<div class="container my-5">
-  <!-- 🔻 Anchor point for "Explore Courses" button -->
-  
-  <h2 id="courses" class="text-center mb-4" style="color: #1035AC;">Our Music Courses</h2>
+<style>
+  .course-card { overflow: hidden; height: 100%; display: flex; flex-direction: column; transition: transform .25s ease, box-shadow .25s ease; }
+  .course-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(16,53,172,.14); }
+  .course-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+  .course-card .body { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; flex: 1; }
+  .course-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: .6rem; }
+  .course-card p { color: var(--muted); font-size: .93rem; margin-bottom: 1rem; }
+  .course-card ul { list-style: none; padding: 0; margin: auto 0 0; font-size: .9rem; }
+  .course-card li { position: relative; padding-left: 1.6rem; margin-bottom: .4rem; }
+  .course-card li::before {
+    content: "\F26A"; font-family: "bootstrap-icons"; position: absolute; left: 0; top: 0;
+    color: var(--gold); font-size: 1rem;
+  }
+  @media (min-width: 992px) {
+    .course-card.wide { flex-direction: row; }
+    .course-card.wide img { flex: 0 0 42%; width: 42%; aspect-ratio: auto; height: auto; min-height: 100%; }
+  }
+  #courses { scroll-margin-top: 90px; }
+  .cta-band {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%);
+    color: #fff; border-radius: var(--radius); padding: clamp(1.8rem, 4vw, 3rem);
+    display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; justify-content: space-between;
+  }
+  .cta-band h3 { color: #fff; margin: 0; font-size: clamp(1.3rem, 2.4vw, 1.8rem); }
+</style>
 
-
-  <!-- Violin -->
-  <div class="row mb-5 align-items-center">
-    <div class="col-md-6">
-      <img src="{% static 'violin.jpg' %}" class="img-fluid rounded shadow" alt="Violin Course">
-    </div>
-    <div class="col-md-6">
-      <h4>Violin Mastery</h4>
-      <p>Learn violin from passionate and experienced instructors. Ideal for beginners and intermediate learners aiming to improve their performance.</p>
-      <ul>
-        <li>Personalized training</li>
-        <li>Performance evaluations</li>
-        <li>Studio-based practice</li>
-      </ul>
-    </div>
+<section class="section">
+  <div class="text-center mb-5">
+    <span class="eyebrow">What we teach</span>
+    <h2 id="courses" class="section-title mb-0">Our Music Courses</h2>
   </div>
 
-  <!-- Piano -->
-  <div class="row mb-5 align-items-center flex-md-row-reverse">
-    <div class="col-md-6">
-      <img src="{% static 'piano.jpg' %}" class="img-fluid rounded shadow" alt="Piano Course">
-    </div>
-    <div class="col-md-6">
-      <h4>Piano Techniques</h4>
-      <p>Explore both classical and modern piano skills through guided lessons, sight reading, and composition.</p>
-      <ul>
-        <li>Scales and technique</li>
-        <li>Solo and duet playing</li>
-        <li>Exam preparation</li>
-      </ul>
-    </div>
-  </div>
+  <div class="row g-4">
 
-  <!-- Guitar -->
-  <div class="row mb-5 align-items-center">
-    <div class="col-md-6">
-      <img src="{% static 'guitar.jpg' %}" class="img-fluid rounded shadow" alt="Guitar Course">
+    <!-- Violin -->
+    <div class="col-md-6 col-lg-4">
+      <article class="card-soft course-card">
+        <img src="{% static 'violin.jpg' %}" alt="Violin Course" loading="lazy" />
+        <div class="body">
+          <h3>Violin Mastery</h3>
+          <p>Learn violin from passionate and experienced instructors. Ideal for beginners and intermediate learners aiming to improve their performance.</p>
+          <ul>
+            <li>Personalized training</li>
+            <li>Performance evaluations</li>
+            <li>Studio-based practice</li>
+          </ul>
+        </div>
+      </article>
     </div>
-    <div class="col-md-6">
-      <h4>Guitar (Acoustic, Bass  & Lead)</h4>
-      <p>Whether acoustic or bass, this course helps students master rhythm, harmony, and lead guitar techniques.</p>
-      <ul>
-        <li>Beginner to advanced chords</li>
-        <li>Band integration practice</li>
-        <li>Improvisation techniques</li>
-      </ul>
-    </div>
-  </div>
 
-  <!-- Vocal Training -->
-  <div class="row mb-5 align-items-center flex-md-row-reverse">
-    <div class="col-md-6">
-      <img src="{% static 'vocal1.jpg' %}" class="img-fluid rounded shadow" alt="Vocal Training">
+    <!-- Piano -->
+    <div class="col-md-6 col-lg-4">
+      <article class="card-soft course-card">
+        <img src="{% static 'piano.jpg' %}" alt="Piano Course" loading="lazy" />
+        <div class="body">
+          <h3>Piano Techniques</h3>
+          <p>Explore both classical and modern piano skills through guided lessons, sight reading, and composition.</p>
+          <ul>
+            <li>Scales and technique</li>
+            <li>Solo and duet playing</li>
+            <li>Exam preparation</li>
+          </ul>
+        </div>
+      </article>
     </div>
-    <div class="col-md-6">
-      <h4>Vocal Training</h4>
-      <p>Develop pitch, tone, and vocal stamina through breathing exercises, projection practice, and song performance.</p>
-      <ul>
-        <li>Voice projection and control</li>
-        <li>Harmony building</li>
-        <li>Microphone and stage techniques</li>
-      </ul>
-    </div>
-  </div>
 
-  <!-- Flute -->
-  <div class="row mb-5 align-items-center">
-    <div class="col-md-6">
-      <img src="{% static 'flute.jpg' %}" class="img-fluid rounded shadow" alt="Flute Course">
+    <!-- Guitar -->
+    <div class="col-md-6 col-lg-4">
+      <article class="card-soft course-card">
+        <img src="{% static 'guitar.jpg' %}" alt="Guitar Course" loading="lazy" />
+        <div class="body">
+          <h3>Guitar (Acoustic, Bass &amp; Lead)</h3>
+          <p>Whether acoustic or bass, this course helps students master rhythm, harmony, and lead guitar techniques.</p>
+          <ul>
+            <li>Beginner to advanced chords</li>
+            <li>Band integration practice</li>
+            <li>Improvisation techniques</li>
+          </ul>
+        </div>
+      </article>
     </div>
-    <div class="col-md-6">
-      <h4>Flute Training</h4>
-      <p>Master breath control, fingering, and phrasing. A great course for students seeking soft melodic expression and technical precision.</p>
-    </div>
-  </div>
 
-  <!-- Saxophone -->
-  <div class="row mb-5 align-items-center flex-md-row-reverse">
-    <div class="col-md-6">
-      <img src="{% static 'sax.jpg' %}" class="img-fluid rounded shadow" alt="Saxophone Course">
+    <!-- Vocal Training -->
+    <div class="col-md-6 col-lg-4">
+      <article class="card-soft course-card">
+        <img src="{% static 'vocal1.jpg' %}" alt="Vocal Training" loading="lazy" />
+        <div class="body">
+          <h3>Vocal Training</h3>
+          <p>Develop pitch, tone, and vocal stamina through breathing exercises, projection practice, and song performance.</p>
+          <ul>
+            <li>Voice projection and control</li>
+            <li>Harmony building</li>
+            <li>Microphone and stage techniques</li>
+          </ul>
+        </div>
+      </article>
     </div>
-    <div class="col-md-6">
-      <h4>Saxophone</h4>
-      <p>Learn jazz, classical, and blues saxophone playing. This course emphasizes tone shaping, improvisation, and stylistic expression.</p>
-    </div>
-  </div>
 
-  <!-- Drums -->
-  <div class="row mb-5 align-items-center">
-    <div class="col-md-6">
-      <img src="{% static 'drums.jpg' %}" class="img-fluid rounded shadow" alt="Drums Course">
+    <!-- Flute -->
+    <div class="col-md-6 col-lg-4">
+      <article class="card-soft course-card">
+        <img src="{% static 'flute.jpg' %}" alt="Flute Course" loading="lazy" />
+        <div class="body">
+          <h3>Flute Training</h3>
+          <p>Master breath control, fingering, and phrasing. A great course for students seeking soft melodic expression and technical precision.</p>
+        </div>
+      </article>
     </div>
-    <div class="col-md-6">
-      <h4>Drumming Essentials</h4>
-      <p>From basic patterns to advanced grooves, this course develops coordination, rhythm, and timing.</p>
-      <ul>
-        <li>Acoustic and electronic kits</li>
-        <li>Tempo and metronome use</li>
-        <li>Live performance practice</li>
-      </ul>
-    </div>
-  </div>
 
-  <!-- Cello -->
-  <div class="row mb-5 align-items-center flex-md-row-reverse">
-    <div class="col-md-6">
-      <img src="{% static 'cello.jpg' %}" class="img-fluid rounded shadow" alt="Cello Course">
+    <!-- Saxophone -->
+    <div class="col-md-6 col-lg-4">
+      <article class="card-soft course-card">
+        <img src="{% static 'sax.jpg' %}" alt="Saxophone Course" loading="lazy" />
+        <div class="body">
+          <h3>Saxophone</h3>
+          <p>Learn jazz, classical, and blues saxophone playing. This course emphasizes tone shaping, improvisation, and stylistic expression.</p>
+        </div>
+      </article>
     </div>
-    <div class="col-md-6">
-      <h4>Cello Techniques</h4>
-      <p>Learn bow control, tone production, and expressive phrasing. Ideal for students pursuing orchestral or solo cello performance.</p>
-    </div>
-  </div>
 
-  <!-- ABRSM -->
-  <div class="row mb-5 align-items-center">
-    <div class="col-md-6">
-      <img src="{% static 'image.png' %}" class="img-fluid rounded shadow" alt="ABRSM Preparation">
+    <!-- Drums -->
+    <div class="col-md-6 col-lg-4">
+      <article class="card-soft course-card">
+        <img src="{% static 'drums.jpg' %}" alt="Drums Course" loading="lazy" />
+        <div class="body">
+          <h3>Drumming Essentials</h3>
+          <p>From basic patterns to advanced grooves, this course develops coordination, rhythm, and timing.</p>
+          <ul>
+            <li>Acoustic and electronic kits</li>
+            <li>Tempo and metronome use</li>
+            <li>Live performance practice</li>
+          </ul>
+        </div>
+      </article>
     </div>
-    <div class="col-md-6">
-      <h4>ABSRM Exam Preparation</h4>
-      <p>We prepare students for ABRSM graded exams in theory and practical. Ideal for learners pursuing structured international certification.</p>
-      <ul>
-        <li>All grades supported</li>
-        <li>Practical and theory coaching</li>
-        <li>Mock exam sessions</li>
-      </ul>
-    </div>
-  </div>
-  <div class="row mb-5 align-items-center">
-    <div class="col-md-6">
-      
-    </div>
-     <!-- Trumpet -->
-  <div class="row mb-5 align-items-center flex-md-row-reverse">
-    <div class="col-md-6">
-      <img src="{% static 'trumpet.jpg' %}" class="img-fluid rounded shadow" alt="Trumpet">
-    </div>
-    <div class="col-md-6">
-      <h4>Trumpet</h4>
-      <p>Master the Art of Trumpet: From First Notes to Flourishes!.</p>
-      <ul>
-        <li>Learn catchy melodies and impressive solo techniques step-by-step.</li>
-        <li>Gain confidence to perform solo or in ensembles on any stage.</li>
-        <li>Build strong fundamentals in breath control and tone production.</li>
-      </ul>
-    </div>
-  </div>
 
-  <!-- Sound Engineering -->
-  <div class="row mb-5 align-items-center">
-    <div class="col-md-6">
-      <img src="{% static 'sound engineering.jpg' %}" class="img-fluid rounded shadow" alt="sound engineering">
+    <!-- Cello -->
+    <div class="col-md-6 col-lg-4">
+      <article class="card-soft course-card">
+        <img src="{% static 'cello.jpg' %}" alt="Cello Course" loading="lazy" />
+        <div class="body">
+          <h3>Cello Techniques</h3>
+          <p>Learn bow control, tone production, and expressive phrasing. Ideal for students pursuing orchestral or solo cello performance.</p>
+        </div>
+      </article>
     </div>
-    <div class="col-md-6">
-      <h4>Sound Engineering</h4>
-      <p>🎧 Master the Art of Sound: From Basics to Beats! </p>
-      <p>
-        Unlock the secrets of professional sound engineering with practical, hands-on learning. Explore the essentials of recording, mixing,<br> 
-        and mastering as you build real-world audio skills. Whether you're a budding producer or a passionate musician,<br> 
-        this course will equip you to confidently shape the sonic landscape of tomorrow.
-      </p>
+
+    <!-- ABRSM -->
+    <div class="col-md-6 col-lg-4">
+      <article class="card-soft course-card">
+        <img src="{% static 'image.png' %}" alt="ABRSM Preparation" loading="lazy" />
+        <div class="body">
+          <h3>ABRSM Exam Preparation</h3>
+          <p>We prepare students for ABRSM graded exams in theory and practical. Ideal for learners pursuing structured international certification.</p>
+          <ul>
+            <li>All grades supported</li>
+            <li>Practical and theory coaching</li>
+            <li>Mock exam sessions</li>
+          </ul>
+        </div>
+      </article>
     </div>
+
+    <!-- Trumpet -->
+    <div class="col-md-6 col-lg-4">
+      <article class="card-soft course-card">
+        <img src="{% static 'trumpet.jpg' %}" alt="Trumpet" loading="lazy" />
+        <div class="body">
+          <h3>Trumpet</h3>
+          <p>Master the Art of Trumpet: From First Notes to Flourishes!</p>
+          <ul>
+            <li>Learn catchy melodies and impressive solo techniques step-by-step.</li>
+            <li>Gain confidence to perform solo or in ensembles on any stage.</li>
+            <li>Build strong fundamentals in breath control and tone production.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <!-- Sound Engineering -->
+    <div class="col-md-6 col-lg-8">
+      <article class="card-soft course-card wide">
+        <img src="{% static 'sound engineering.jpg' %}" alt="Sound engineering" loading="lazy" />
+        <div class="body justify-content-center">
+          <h3>Sound Engineering</h3>
+          <p class="fw-semibold" style="color: var(--ink);">🎧 Master the Art of Sound: From Basics to Beats!</p>
+          <p class="mb-0">Unlock the secrets of professional sound engineering with practical, hands-on learning. Explore the essentials of recording, mixing, and mastering as you build real-world audio skills. Whether you're a budding producer or a passionate musician, this course will equip you to confidently shape the sonic landscape of tomorrow.</p>
+        </div>
+      </article>
+    </div>
+
   </div>
+</section>
 
-
-</div>
+<section class="section pt-0">
+  <div class="cta-band">
+    <h3>Ready to start your musical journey?</h3>
+    <a href="{% url 'apply' %}" class="btn-gold">Apply now <i class="bi bi-arrow-right"></i></a>
+  </div>
+</section>
 {% endblock %}

@@ -1,17 +1,24 @@
-
-
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>
-        <h1>Youtube Videos</h1>
-    </p>
-</body>
-</html>
+{% block title %}Videos | Spiccato Tunes{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="text-center mb-4">
+    <span class="eyebrow">Watch</span>
+    <h2 class="section-title mb-0">YouTube Videos</h2>
+  </div>
+
+  <div class="card-soft text-center p-5" style="max-width: 640px; margin: 0 auto;">
+    <i class="bi bi-youtube" style="font-size: 2.6rem; color: var(--gold);"></i>
+    <p class="muted mt-3 mb-0">Videos will appear here.</p>
+  </div>
+
+  {% comment %}To add a video, paste one block like this inside a <div class="col-md-6"> in a <div class="row g-4">:
+     <div class="ratio ratio-16x9 rounded-4 overflow-hidden">
+       <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Video title" allowfullscreen></iframe>
+     </div>
+  {% endcomment %}
+</section>
+{% endblock %}

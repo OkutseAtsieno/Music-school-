@@ -4,78 +4,71 @@
 
 {% block content %}
 <style>
-    
-
-    .enroll-container {
-        max-width: 600px;
-        margin: 40px auto;
-        padding: 30px;
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        background-color: #f9f9f9;
-    }
-
-    .form-control {
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    label {
-        font-weight: 500;
-    }
-
-    .apply-button {
-        display: flex;
-        justify-content: center;
-        margin-top: 30px;
-    }
+  .form-card { padding: clamp(1.4rem, 3.5vw, 2.5rem); scroll-margin-top: 90px; }
+  .form-card .form-label { font-weight: 500; font-size: .88rem; margin-bottom: .35rem; color: var(--ink); }
+  .form-card .form-control, .form-card .form-select {
+    border: 1px solid var(--line); border-radius: 12px; padding: .7rem .95rem; font-size: .95rem; background-color: #fbfcff;
+  }
+  .form-card .form-control:focus, .form-card .form-select:focus {
+    border-color: var(--blue); box-shadow: 0 0 0 .22rem rgba(16, 53, 172, .14); background-color: #fff;
+  }
+  .form-card .form-check-input:checked { background-color: var(--blue); border-color: var(--blue); }
+  .req::after { content: " *"; color: #c0392b; }
+  .side-card { padding: 1.6rem; position: sticky; top: 90px; }
+  .side-card a { text-decoration: none; font-weight: 500; }
+  .side-card .row-item { display: flex; gap: .8rem; align-items: flex-start; margin-bottom: 1rem; }
+  .side-card .bi { color: var(--gold); font-size: 1.15rem; margin-top: .1rem; }
+  @media (max-width: 991.98px) { .side-card { position: static; } }
 </style>
 
-<!-- ✅ Apply Now Button at Top -->
-<div class="apply-button">
-    <a href="#enroll-form" class="btn btn-success btn-lg">Apply Now</a>
-</div>
+<section class="section">
+  <div class="row g-4 justify-content-center">
 
-<!-- 🎵 Enrollment Form -->
-<div class="enroll-container" id="enroll-form">
-    <h2 class="text-center mb-4">Music School Enrollment Form</h2>
-    <form method="POST" action="{% url 'enroll' %}">
-        {% csrf_token %}
+    <!-- 🎵 Enrollment Form -->
+    <div class="col-lg-8">
+      <div class="card-soft form-card" id="enroll-form">
+        <span class="eyebrow">Enrollment</span>
+        <h2 class="section-title">Music School Enrollment Form</h2>
 
-        <!-- Full Name -->
-        <div class="form-group mt-2">
-            <label for="full_name">Full Name</label>
-            <input type="text" class="form-control" name="full_name" id="full_name" required>
-        </div>
+        <form method="POST" action="{% url 'enroll' %}" class="mt-4">
+          {% csrf_token %}
 
-        <!-- Age -->
-        <div class="form-group mt-2">
-            <label for="age">Age</label>
-            <input type="number" class="form-control" name="age" id="age" min="2" required>
-        </div>
+          <div class="row g-3">
 
-        <!-- Guardian's Phone Number -->
-        <div class="form-group mt-2" id="guardian-phone-group" style="display: none;">
-            <label for="guardian_phone">Guardian's Phone Number</label>
-            <input type="text" class="form-control" name="guardian_phone" id="guardian_phone">
-        </div>
+            <!-- Full Name -->
+            <div class="col-md-8">
+              <label class="form-label req" for="full_name">Full Name</label>
+              <input type="text" class="form-control" name="full_name" id="full_name" required>
+            </div>
 
-        <!-- Email -->
-        <div class="form-group mt-2">
-            <label for="email">Email Address</label>
-            <input type="email" class="form-control" name="email" id="email" required>
-        </div>
+            <!-- Age -->
+            <div class="col-md-4">
+              <label class="form-label req" for="age">Age</label>
+              <input type="number" class="form-control" name="age" id="age" min="2" required>
+            </div>
 
-        <!-- Phone -->
-        <div class="form-group mt-2">
-            <label for="phone">Phone Number</label>
-            <input type="text" class="form-control" name="phone" id="phone" required>
-        </div>
+            <!-- Guardian's Phone Number (appears for under 18) -->
+            <div class="col-12" id="guardian-phone-group" style="display: none;">
+              <label class="form-label req" for="guardian_phone">Guardian's Phone Number</label>
+              <input type="text" class="form-control" name="guardian_phone" id="guardian_phone">
+            </div>
 
-        <!-- Instrument -->
-        <div class="form-group mt-2">
-            <label for="instrument">Instrument</label>
-            <select class="form-control" name="instrument" id="instrument" required onchange="toggleGuitarOptions()">
+            <!-- Email -->
+            <div class="col-md-6">
+              <label class="form-label req" for="email">Email Address</label>
+              <input type="email" class="form-control" name="email" id="email" required>
+            </div>
+
+            <!-- Phone -->
+            <div class="col-md-6">
+              <label class="form-label req" for="phone">Phone Number</label>
+              <input type="text" class="form-control" name="phone" id="phone" required>
+            </div>
+
+            <!-- Instrument -->
+            <div class="col-12">
+              <label class="form-label req" for="instrument">Instrument</label>
+              <select class="form-select" name="instrument" id="instrument" required onchange="toggleGuitarOptions()">
                 <option value="">-- Select Instrument --</option>
                 <option value="Piano">Piano</option>
                 <option value="Violin">Violin</option>
@@ -90,75 +83,78 @@
                 <option value="Drums">Drums</option>
                 <option value="Guitar">Guitar</option>
                 <option value="Voice">Voice</option>
-            </select>
-        </div>
+              </select>
+            </div>
 
-        <!-- Guitar Type -->
-        <div class="form-group mt-2" id="guitar-options" style="display: none;">
-            <label for="guitar_type">Guitar Type</label>
-            <select class="form-control" name="guitar_type" id="guitar_type">
+            <!-- Guitar Type (appears for Guitar) -->
+            <div class="col-12" id="guitar-options" style="display: none;">
+              <label class="form-label" for="guitar_type">Guitar Type</label>
+              <select class="form-select" name="guitar_type" id="guitar_type">
                 <option value="">-- Select Guitar Type --</option>
                 <option value="Acoustic">Acoustic</option>
                 <option value="Lead/Solo">Lead/Solo</option>
                 <option value="Bass">Bass</option>
-            </select>
-        </div>
+              </select>
+            </div>
 
-        <!-- Schedule -->
-        <div class="form-group mt-2">
-            <label for="schedule">Preferred Schedule</label>
-            <select class="form-control" name="schedule" id="schedule" required>
+            <!-- Schedule -->
+            <div class="col-md-6">
+              <label class="form-label req" for="schedule">Preferred Schedule</label>
+              <select class="form-select" name="schedule" id="schedule" required>
                 <option value="">-- Select Schedule --</option>
                 <option value="Weekdays (Morning)">Weekdays (Morning)</option>
                 <option value="Weekdays (Afternoon)">Weekdays (Afternoon)</option>
                 <option value="Weekdays (Evening)">Weekdays (Evening)</option>
                 <option value="Weekends">Weekends</option>
                 <option value="Flexible">Flexible</option>
-            </select>
-        </div>
+              </select>
+            </div>
 
-        <!-- Mode of Study -->
-        <div class="form-group mt-2">
-            <label for="mode">Mode of Study</label>
-            <select class="form-control" name="mode" id="mode" required>
+            <!-- Mode of Study -->
+            <div class="col-md-6">
+              <label class="form-label req" for="mode">Mode of Study</label>
+              <select class="form-select" name="mode" id="mode" required>
                 <option value="">-- Select Mode --</option>
                 <option value="Online">Online</option>
                 <option value="Blended">Blended</option>
                 <option value="Physical - Campus Based">Physical - Campus Based</option>
                 <option value="Physical - Home Based">Physical - Home Based</option>
-            </select>
-        </div>
-        <br>
+              </select>
+            </div>
 
-        <p>Any Inquiry <br>
-            Call or WhatsApp 
-            <a href="tel:+254729828945">0729828945</a><br>
-            or 
-            <a href="tel:+254719283798">0719283798</a><br>
-            Or email 
-            <a href="mailto:musunguduncan9@gmail.com">musunguduncan9@gmail.com</a>
-          </p>
-          
-       
-       
+            <!-- Consent Agreement -->
+            <div class="col-12 mt-4">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="consent" name="consent" required>
+                <label class="form-check-label" for="consent">
+                  I agree to the terms and allow Spiccato Tunes to contact me regarding my enrollment.
+                </label>
+              </div>
+            </div>
 
-        <!-- Consent Agreement -->
-<div class="form-group form-check mt-3">
-    <input type="checkbox" class="form-check-input" id="consent" name="consent" required>
-    <label class="form-check-label" for="consent">
-        I agree to the terms and allow Spiccato Tunes to contact me regarding my enrollment.
-    </label>
-</div>
+            <!-- Submit -->
+            <div class="col-12 mt-3">
+              <button type="submit" class="btn-brand w-100 py-3">Submit Enrollment</button>
+            </div>
 
-        
+          </div>
+        </form>
+      </div>
+    </div>
 
-        <!-- Submit -->
-        <div class="text-center mt-4">
-            <button type="submit" class="btn btn-primary">Submit Enrollment</button>
-        </div>
-    </form>
-</div>
+    <!-- Questions -->
+    <div class="col-lg-4">
+      <aside class="card-soft side-card">
+        <h3 class="h5 mb-3">Any inquiry?</h3>
+        <p class="muted small">Call or WhatsApp us, or send an email.</p>
+        <div class="row-item"><i class="bi bi-telephone"></i><a href="tel:+254729828945">0729828945</a></div>
+        <div class="row-item"><i class="bi bi-whatsapp"></i><a href="tel:+254719283798">0719283798</a></div>
+        <div class="row-item mb-0"><i class="bi bi-envelope"></i><a href="mailto:musunguduncan9@gmail.com" style="word-break: break-all;">musunguduncan9@gmail.com</a></div>
+      </aside>
+    </div>
 
+  </div>
+</section>
 
 <!-- ✅ Scripts -->
 <script>

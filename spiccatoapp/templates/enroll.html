@@ -1,5 +1,32 @@
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit Enrollment</button>
-  </form>
+{% extends "base.html" %}
+
+{% block title %}Enroll - Spiccato Tunes{% endblock %}
+
+{% block content %}
+<style>
+  .enroll-card { max-width: 640px; margin: 0 auto; padding: clamp(1.4rem, 3.5vw, 2.5rem); }
+  .enroll-card p { margin-bottom: 1.1rem; }
+  .enroll-card label { display: block; font-weight: 500; font-size: .88rem; margin-bottom: .35rem; }
+  .enroll-card input:not([type=checkbox]):not([type=radio]), .enroll-card select, .enroll-card textarea {
+    width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: .7rem .95rem;
+    font-size: .95rem; background: #fbfcff; font-family: inherit;
+  }
+  .enroll-card input:focus, .enroll-card select:focus, .enroll-card textarea:focus {
+    outline: none; border-color: var(--blue); box-shadow: 0 0 0 .22rem rgba(16, 53, 172, .14); background: #fff;
+  }
+  .enroll-card .errorlist { list-style: none; padding: 0; margin: 0 0 .4rem; color: #c0392b; font-size: .85rem; }
+  .enroll-card .helptext { display: block; color: var(--muted); font-size: .8rem; margin-top: .25rem; }
+</style>
+
+<section class="section">
+  <div class="card-soft enroll-card">
+    <span class="eyebrow">Enrollment</span>
+    <h2 class="section-title">Enroll</h2>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn-brand w-100 py-3 mt-2">Submit Enrollment</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
